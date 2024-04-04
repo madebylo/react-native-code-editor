@@ -89,6 +89,11 @@ type Props = {
      */
     onKeyPress?: (key: string) => void;
 
+     /**
+     * OnS.
+     */
+    onSelectionChange?: (key: TextInputSelectionType) => void;
+
     /**
      * Whether to show line numbers next to each line.
      */
@@ -127,10 +132,10 @@ const CodeEditor = (props: PropsWithForwardRef): JSX.Element => {
         initialValue = '',
         onChange,
         onKeyPress,
+        onSelectionChange,
         showLineNumbers = false,
         readOnly = false,
         autoFocus = true,
-        getCursorPosition,
         testID,
         forwardedRef,
     } = props;
@@ -244,8 +249,8 @@ const CodeEditor = (props: PropsWithForwardRef): JSX.Element => {
         inputSelection.current = e.nativeEvent.selection;
 
         // Aufrufen der getCursorPosition-Callback-Prop
-        if (props.getCursorPosition) {
-            props.getCursorPosition(inputSelection.current);
+        if (props.onSelectionChange) {
+            props.onSelectionChange(inputSelection.current);
         }
     };
 

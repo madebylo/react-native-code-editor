@@ -130,6 +130,7 @@ const CodeEditor = (props: PropsWithForwardRef): JSX.Element => {
         showLineNumbers = false,
         readOnly = false,
         autoFocus = true,
+        getCursorPosition?: (selection: TextInputSelectionType) => void,
         testID,
         forwardedRef,
     } = props;
@@ -241,6 +242,11 @@ const CodeEditor = (props: PropsWithForwardRef): JSX.Element => {
 
     const handleSelectionChange = (e: NativeSyntheticEvent<TextInputSelectionChangeEventData>) => {
         inputSelection.current = e.nativeEvent.selection;
+
+        // Aufrufen der getCursorPosition-Callback-Prop
+        if (props.getCursorPosition) {
+            props.getCursorPosition(inputSelection.current);
+        }
     };
 
     return (

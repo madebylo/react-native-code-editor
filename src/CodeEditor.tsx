@@ -130,7 +130,7 @@ const CodeEditor = (props: PropsWithForwardRef): JSX.Element => {
         showLineNumbers = false,
         readOnly = false,
         autoFocus = true,
-        getCursorPosition?: (selection: TextInputSelectionType) => void,
+        getCursorPosition,
         testID,
         forwardedRef,
     } = props;
